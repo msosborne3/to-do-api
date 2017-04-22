@@ -42,7 +42,16 @@ RSpec.describe 'To Do API', type :request do
       end
     end
 
-    
+    # Tests that the behavior is as expected when the list does not exist.
+    context 'when list record does not exist' do
+      # let lsit_id be an id that does not exist
+      let(:list_id) { 10 }
+
+      # The request should return 404 not found
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
   end
 
 
