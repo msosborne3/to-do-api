@@ -88,8 +88,24 @@ RSpec.describe 'Items API' do
     end
   end
 
+  # Tests that put /lists/:list_id/items/:id has the expected response
   describe 'PUT /lists/:list_id/items/:id' do
+    let(:valid_attr) { {text: 'Grocery Shopping'} }
 
+    context 'when the item record exists' do
+      # make a put request to /lists/:list_id/items/:id with valid attributes
+      before { put "/lists/#{list_id}/items/#{id}", params: valid_attr }
+
+      # The item should be updated
+      it 'updates the item record' do
+        expect(response.body).to be_empty
+      end
+
+      # The valid request should get a 204 status code in response
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
   end
 
   describe 'DELETE /lists/:list_id/items/:id' do
