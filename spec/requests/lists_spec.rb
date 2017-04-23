@@ -3,7 +3,7 @@ require 'rails_helper'
 # Using requests to rest this code since it is an API
 # and the requests are very important.
 
-RSpec.describe 'To Do API', type :request do
+RSpec.describe 'To Do API', type: :request do
   # initialize some lists and a list_id for testing
   let!(:lists) {create_list(:list, 8)}
   let!(:list_id) {lists.first.id}
