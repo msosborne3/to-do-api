@@ -1,10 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
 export function addList(list) {
-  return {
-    type: 'ADD_LIST',
-    list
-  }
+    return (dispatch) => {
+    return fetch(`/lists?name=${list.name}`, {
+      method: 'POST'
+    })
+      .then(response => response.json())
+      .then(list => dispatch({
+        type: 'ADD_LIST',
+        list
+      }));
+  };
 }
 
 export function addItem(item) {
@@ -26,7 +32,8 @@ export function fetchLists() {
     return fetch('/lists.json')
       .then(response => response.json())
       .then(lists => dispatch({
-        type: 'ADD_LISTS', lists
+        type: 'ADD_LISTS',
+        lists
       }));
   };
 }
