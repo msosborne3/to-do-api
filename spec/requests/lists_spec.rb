@@ -89,4 +89,17 @@ RSpec.describe 'To Do API', type :request do
     end
   end
 
+  # Tests that PUT /lists/:id has the expected response
+  describe 'PUT /lists/:id' do
+    let(:valid_attr) { {name: 'Grocery Shopping'} }
+
+    context 'when the list record exists' do
+
+    end
+
+    context 'when the list record does not exist' do
+
+    end
+  end
+
 end
