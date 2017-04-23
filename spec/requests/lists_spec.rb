@@ -94,11 +94,18 @@ RSpec.describe 'To Do API', type :request do
     let(:valid_attr) { {name: 'Grocery Shopping'} }
 
     context 'when the list record exists' do
+      # make a put request to /lists/:id with valid attributes
+      before { put "/lists/#{list_id}", params: valid_attr }
 
-    end
+      # The list should be updated
+      it 'updates the list record' do
+        expect(response.body).to be_empty
+      end
 
-    context 'when the list record does not exist' do
-
+      # The valid request should get a 204 status code in response
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
     end
   end
 
