@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 export function addList(list) {
   return {
     type: 'ADD_LIST',
@@ -17,4 +19,12 @@ export function toggleDone(item) {
     type: 'TOGGLE_DONE',
     item
   }
+}
+
+export function fetchLists() {
+  return (dispatch) => {
+    return fetch('/lists')
+      .then(response => response.json())
+      .then(lists => dispatch({type: 'ADD_LISTS, lists'}));
+  };
 }
