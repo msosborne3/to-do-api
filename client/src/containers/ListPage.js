@@ -19,7 +19,6 @@ class ListPage extends Component {
         <ul>
           {lists}
         </ul>
-        <p>PLACEHOLDER FOR ADD NEW LIST LINK</p>
       </div>
     );
   }
