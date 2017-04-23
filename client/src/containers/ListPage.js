@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { fetchLists } from '../actions/index'
 
 class ListPage extends Component {
-  handleOnClick() {
+  componentDidMount() {
     this.props.fetchLists()
   }
 
@@ -16,7 +16,6 @@ class ListPage extends Component {
     return (
       <div>
         <h2>To do lists</h2>
-        <button onClick={(event) = this.handleOnClick(event)} />
         <ul>
           {lists}
         </ul>
