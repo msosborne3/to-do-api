@@ -1,6 +1,6 @@
 let id = 0;
 export default function listReducer(state= {
-  lists: [{id: 0, name: 'list1'}]
+  lists: []
 }, action) {
   switch(action.type) {
     case 'ADD_LIST':
@@ -10,7 +10,7 @@ export default function listReducer(state= {
       // Return this list add to the lists already created.
       return {lists: state.lists.concat(list)};
     case 'ADD_LISTS':
-      return {lists: state.lists.concat(action.lists)}
+      return {lists: action.lists}
     default:
       return state;
   }
