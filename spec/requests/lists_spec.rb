@@ -79,7 +79,13 @@ RSpec.describe 'To Do API', type :request do
     end
 
     context 'when the request is invalid' do
+      # makes a post request to create a list with blank attribute
+      before { post '/lists', params: { name: '' } }
 
+      # an invalid request should respond with status code 422
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
     end
   end
 
