@@ -10,7 +10,7 @@ class ListsController < ApplicationController
 
   # POST /lists
   def create
-    # use create! so that an ActiveRecord::RecordNotFound exception
+    # use create! so that an ActiveRecord::RecordInvalid exception
     # will be thrown if needed.
     @list = List.create!(list_params)
     json_response(@list, :created)
