@@ -28,8 +28,36 @@ RSpec.describe 'Items API' do
 
   end
 
+  # Tests that get /lists/:list_id/items/:id has the expected response
   describe 'GET /lists/:list_id/items/:id' do
+    before { get "/lists/#{list_id}/items/#{id}"}
 
+    # The behavior should depend on whether or not the item exists.
+
+    # Tests that the behavior is as expected when the item does exist.
+    context 'when item record exists' do
+      # The correct item should be returned
+      it 'returns the correct item' do
+        expect(JSON.parse(response.body)).not_to be_empty
+        expect(JSON.parse(response.body)['id']).to eq(id)
+      end
+
+      # The request should be successful
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    # Tests that the behavior is as expected when the item does not exist.
+    context 'when item record does not exist' do
+      # let id be an id that does not exist
+      let(:id) { 20 }
+
+      # The request should return 404 not found
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
   end
 
   describe 'PUT /lists/:list_id/items/:id' do
