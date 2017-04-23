@@ -5,8 +5,8 @@ require 'rails_helper'
 
 RSpec.describe 'To Do API', type: :request do
   # initialize some lists and a list_id for testing
-  let!(:lists) {create_list(:list, 8)}
-  let!(:list_id) {lists.first.id}
+  let!(:lists) { FactoryGirl.create_list(:list, 8) }
+  let!(:list_id) { lists.first.id }
 
   # Tests that GET /lists has the expected response
   describe 'GET /lists' do
