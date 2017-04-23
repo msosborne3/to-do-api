@@ -9,6 +9,8 @@ export default function listReducer(state= {
       let list = {id: id, name: action.list.name};
       // Return this list add to the lists already created.
       return {lists: state.lists.concat(list)};
+    case 'ADD_LISTS':
+      return {lists: state.lists.concat(action.lists)}
     default:
       return state;
   }

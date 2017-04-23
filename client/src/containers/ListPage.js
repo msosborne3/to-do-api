@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { fetchLists } from '../actions/index'
 
 class ListPage extends Component {
+  handleOnClick() {
+    this.props.fetchLists()
+  }
+
   render() {
-    // for testing  
-    //let lists = [{id: 1, name: 'school'}, {id: 2, name: 'work'}];
+    const lists = this.props.lists.lists.map((list) => 
+        <li key={list.id}>{list.name}</li>
+      )
 
     return (
       <div>
         <h2>To do lists</h2>
+        <button onClick={(event) = this.handleOnClick(event)} />
         <ul>
-          {this.props.lists.lists.map((list) => 
-            <li key={list.id}>{list.name}</li>
-          )}
+          {lists}
         </ul>
         <p>PLACEHOLDER FOR ADD NEW LIST LINK</p>
       </div>
@@ -26,4 +32,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ListPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchLists: bindActionCreators(fetchLists, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
