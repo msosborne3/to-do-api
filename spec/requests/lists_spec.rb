@@ -15,8 +15,8 @@ RSpec.describe 'To Do API', type: :request do
     # GET /list should respond with json of size 8 since there
     # are 8 lists
     it 'returns lists' do
-      expect(json).not_to be_empty
-      export(json.size).to eq(8)
+      expect(JSON.parse(response.body)).not_to be_empty
+      expect(JSON.parse(response.body).size).to eq(8)
     end
 
     # The request should be successful
@@ -27,7 +27,7 @@ RSpec.describe 'To Do API', type: :request do
 
   # tests that GET /lists/:id has the expected response
   describe 'GET lists/:id' do
-    before { get '/lists/#{list_id}'}
+    before { get "/lists/#{list_id}"}
 
     # The behavior should depend on whether or not the lsit exists.
 
@@ -35,8 +35,8 @@ RSpec.describe 'To Do API', type: :request do
     context 'when list record exists' do
       # The correct list should be returned
       it 'returns the correct list' do
-        expect(json).not_to be_empty
-        expect(json['id']).to eq(list_id)
+        expect(JSON.parse(response.body)).not_to be_empty
+        expect(JSON.parse(response.body)['id']).to eq(list_id)
       end
 
       # The request should be successful
@@ -69,7 +69,7 @@ RSpec.describe 'To Do API', type: :request do
       # a list should be created with the attributes if the request
       # is valid
       it 'creates a list' do
-        expect(json['title']).to eq('Grocery shop')
+        expect(JSON.parse(response.body)['name']).to eq('Grocery shop')
       end
 
       # if a list is created, it should respond with a created status code
