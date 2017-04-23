@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# Using requests to rest this code since it is an API
+# and the requests are very important.
+
 RSpec.describe 'To Do API', type :request do
   # initialize some lists and a list_id for testing
   let!(:lists) {create_list(:list, 8)}
@@ -54,5 +57,18 @@ RSpec.describe 'To Do API', type :request do
     end
   end
 
+  # Tests that POST /lists has the expected response
+  describe 'POST /lists' do
+    # initialize an attribute for testing
+    let(:valid_attr) { {name: 'Grocery shop'} }
+
+    context 'when the request is valid' do
+
+    end
+
+    context 'when the request is invalid' do
+
+    end
+  end
 
 end
