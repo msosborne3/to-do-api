@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ListPage from './containers/ListPage';
 
-class App extends Component {
+
+const App = props => ({
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to your to do list!</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ListPage store={props.store} />
+        {props.children}
       </div>
     );
   }
-}
+});
 
 export default App;
