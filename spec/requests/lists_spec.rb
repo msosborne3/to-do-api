@@ -109,4 +109,15 @@ RSpec.describe 'To Do API', type :request do
     end
   end
 
+  # Tests that DELETE /lists/:id has the expected response
+  describe 'DELETE /lists/:id' do
+    # make a delete request to /lists/:id
+    before { delete "/lists/#{list_id}" }
+
+    # The request should respond with 204 status code
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
+
 end
