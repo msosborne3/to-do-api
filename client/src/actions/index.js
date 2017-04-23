@@ -23,8 +23,10 @@ export function toggleDone(item) {
 
 export function fetchLists() {
   return (dispatch) => {
-    return fetch('/lists')
+    return fetch('/lists.json')
       .then(response => response.json())
-      .then(lists => dispatch({type: 'ADD_LISTS, lists'}));
+      .then(lists => dispatch({
+        type: 'ADD_LISTS', lists
+      }));
   };
 }
