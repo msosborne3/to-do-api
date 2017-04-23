@@ -24,8 +24,36 @@ RSpec.describe 'Items API' do
     end
   end
 
+  # Tests that post /lists/:list_id/items has the expected response
   describe 'POST /lists/:list_id/items' do
+    # initialize an attribute for testing
+    let(:valid_attr) { {text: 'Grocery shop'} }
 
+    context 'when the request is valid' do
+      # makes a post request to create an item with valid_attr
+      before { post "/lists/#{list_id}/items", params: valid_attr }
+
+      # an item should be created with the attributes if the request
+      # is valid
+      it 'creates a item' do
+        expect(JSON.parse(response.body)['text']).to eq('Grocery shop')
+      end
+
+      # if an item is created, it should respond with a created status code
+      it 'returns a status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      # makes a post request to create an item with blank attribute
+      before { post post "/lists/#{list_id}/items", params: { text: '' } }
+
+      # an invalid request should respond with status code 422
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
   end
 
   # Tests that get /lists/:list_id/items/:id has the expected response
