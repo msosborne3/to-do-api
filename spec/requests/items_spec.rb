@@ -108,7 +108,14 @@ RSpec.describe 'Items API' do
     end
   end
 
+  # Tests that delete /lists/:list_id/items/:id has the expected response
   describe 'DELETE /lists/:list_id/items/:id' do
+    # make a delete request to /lists/:list_id/items/:id
+    before { delete "/lists/#{list_id}/items/#{id}" }
 
+    # The request should respond with 204 status code
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
   end
 end
