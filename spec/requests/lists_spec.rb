@@ -63,7 +63,19 @@ RSpec.describe 'To Do API', type :request do
     let(:valid_attr) { {name: 'Grocery shop'} }
 
     context 'when the request is valid' do
+      # makes a post request to create a list with valid_attr
+      before { post '/lists', params: valid_attr }
 
+      # a list should be created with the attributes if the request
+      # is valid
+      it 'creates a list' do
+        expect(json['title']).to eq('Grocery shop')
+      end
+
+      # if a list is created, it should respond with a created status code
+      it 'returns a status code 201' do
+        expect(response).to have_http_status(201)
+      end
     end
 
     context 'when the request is invalid' do
