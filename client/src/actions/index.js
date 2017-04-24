@@ -20,11 +20,17 @@ export function addItem(item) {
   }
 }
 
-export function toggleDone(item) {
-  return {
-    type: 'TOGGLE_DONE',
-    item
-  }
+export function toggleDone(list, item) {
+  return (dispatch) => {
+    dispatch({
+      type: 'TOGGLE_DONE',
+      list,
+      item
+    })
+    return fetch(`/lists/${list.id}/items/${item.id}?text=${item.text}&done=${!item.done}`, {
+      method: 'PUT'
+    })
+  };
 }
 
 export function fetchLists() {
