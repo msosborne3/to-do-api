@@ -24,9 +24,10 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <Route path='/lists' component={ListPage}>
           <Route path='/lists/new' component={ListNew} />
-          <Route path='/lists/:id' component={ListShow} />
+          <Route path='/lists/:id' component={ListShow}>
+            <Route path='lists/:list_id/items/new' component={ItemsNew} />
+          </Route>
         </Route>
-        <Route path='/items/new' component={ItemsNew} />
       </Route>
     </Router>
   </Provider>,
