@@ -10,7 +10,6 @@ const App = props => ({
         <div className="App-header">
           <h2>Welcome to your to do list!</h2>
         </div>
-        <ListPage store={props.store} />
         {props.children}
       </div>
     );

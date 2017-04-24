@@ -7,8 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers'
 import thunk from 'redux-thunk';
 //Routing:
-import { Switch, Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { Router, Route, browserHistory } from 'react-router';
 import Home from './components/Home';
 import ListPage from './containers/ListPage';
 import ListShow from './containers/ListShow';
@@ -21,16 +20,15 @@ const store = createStore(rootReducer, compose(applyMiddleware(thunk), window.__
 
 ReactDOM.render(
   <Provider store={store}>
-    <App store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/lists/new' component={ListNew} />
-          <Route exact path='/lists/:id' component={ListShow} />
-          <Route exact path='/items/new' component={ItemsNew} />
-        </Switch>
-      </BrowserRouter>
-    </App>
+    <Router history={browserHistory}>
+      <Route path='/' component={App}>
+        <Route path='/lists' component={ListPage}>
+          <Route path='/lists/new' component={ListNew} />
+          <Route path='/lists/:id' component={ListShow} />
+        </Route>
+        <Route path='/items/new' component={ItemsNew} />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

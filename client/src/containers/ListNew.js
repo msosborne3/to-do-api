@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { addList } from '../actions';
 
 class ListNew extends Component {
@@ -22,7 +22,7 @@ class ListNew extends Component {
   handleSubmit(ev) {
     ev.preventDefault();
     this.props.addList(this.state);
-    //browserHistory.push('/lists');
+    browserHistory.push('/lists');
     this.setState({
       name: ''
     })

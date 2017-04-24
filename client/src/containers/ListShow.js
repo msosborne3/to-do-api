@@ -27,7 +27,7 @@ const mapStateToProps = (state, props) => {
   if (list) {
     return {
       list: list,
-      items: state.items
+      items: state.list.items
     }
   } else {
     return {
