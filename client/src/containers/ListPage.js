@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { fetchLists } from '../actions/index'
+import { Link } from 'react-router';
 
 class ListPage extends Component {
   componentDidMount() {
@@ -10,7 +11,9 @@ class ListPage extends Component {
 
   render() {
     const lists = this.props.lists.lists.map((list) => 
-        <li key={list.id}>{list.name}</li>
+        <li key={list.id}>
+          <Link to={`/lists/${list.id}`}>{list.name}</Link>
+        </li>
       )
 
     return (
@@ -19,6 +22,8 @@ class ListPage extends Component {
         <ul>
           {lists}
         </ul>
+        <Link to="/lists/new">New List</Link>
+        {this.props.children}
       </div>
     );
   }
