@@ -1,33 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleDone } from '../actions/index'
 import { bindActionCreators } from 'redux';
 
-const ListShow = (props) => {
-  const list = props.list;
-  let listItems = props.items.filter(item => item.parentID === list.id);
+class ListShow extends Component {
 
-  return (
-    <div>
-      <h2>List: {list.name}</h2>
+  render() {
+    const list = this.props.list;
+    const listItems = this.props.items;
 
-      <ul>
-        {listItems.map((item) => 
-          <li key={item.id} onClick={() => {this.props.toggleDone(item)}}>{item.done ? <strike>{item.text}</strike> : item.text}</li>
-        )}
-      </ul>
-    </div>
-  );
+    return (
+      <div>
+        <h2>List: {list.name}</h2>
+
+        <ul>
+          {listItems.map((item) => 
+            <li key={item.id} onClick={() => {this.props.toggleDone(this.props.list, item)}}>{item.done ? <strike>{item.text}</strike> : item.text}</li>
+          )}
+        </ul>
+        {this.props.children}
+      </div>
+    );
+  }
 };
 
 
-const mapStateToProps = (state, props) => {
-  let lists = state.lists.lists;
-  const list = lists.find( (list) => list.id === props.match.params.id )
+const mapStateToProps = (state, ownProps) => {
+  const list = state.lists.lists.find( (list) => list.id == ownProps.routeParams.id )
   if (list) {
     return {
       list: list,
-      items: state.list.items
+      items: list.items
     }
   } else {
     return {
