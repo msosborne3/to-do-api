@@ -19,8 +19,8 @@ class ListShow extends Component {
             <li key={item.id} onClick={() => {this.props.toggleDone(this.props.list, item)}}>{item.done ? <strike>{item.text}</strike> : item.text}</li>
           )}
         </ul>
-        {this.props.children}
         <Link className="new-link" to={`/lists/${list.id}/items/new`}>New Item</Link>
+        {this.props.children}
       </div>
     );
   }

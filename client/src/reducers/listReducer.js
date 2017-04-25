@@ -38,9 +38,7 @@ export default function listReducer(state= {
           return list
         }
         // if the list needed is found then change it to the new list
-        return Object.assign({}, list, {
-          list: action.list
-        })
+        return action.list
       })
       return {lists: lists}
     default:
