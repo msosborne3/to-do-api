@@ -1,24 +1,12 @@
-# README
+# To Do List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a to do list in which you can create many lists and create many items within each list. The items can be marked off when they are completed.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+-------
+To use:
+In Terminal run
+```
+git clone git@github.com:msosborne3/to-do-api-react-redux.git
+cd to-do-api-react-redux
+rake start
+```
