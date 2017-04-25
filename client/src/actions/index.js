@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function addList(list) {
-    return (dispatch) => {
+  return (dispatch) => {
     return fetch(`/lists?name=${list.name}`, {
       method: 'POST'
     })
@@ -13,11 +13,18 @@ export function addList(list) {
   };
 }
 
-export function addItem(item) {
-  return {
-    type: 'ADD_ITEM',
-    item
-  }
+export function addItem(list, item) {
+  return (dispatch) => {
+    return fetch(`/lists/${list.id}/items?text=${item.text}&done=${item.done}`, {
+      method: 'POST'
+    })
+      .then(response => response.json())
+      .then((list, item) => dispatch({
+        type: 'ADD_ITEM_TO_LIST',
+        list,
+        item
+      }));
+  };
 }
 
 export function toggleDone(list, item) {
