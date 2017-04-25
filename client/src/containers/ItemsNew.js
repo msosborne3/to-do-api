@@ -11,7 +11,6 @@ class ItemsNew extends Component {
     this.state = {
       text: '',
       done: false,
-      parentID: 1
     }
   }
 
@@ -23,7 +22,7 @@ class ItemsNew extends Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-    this.props.addItem(this.state);
+    this.props.addItem(this.props.list, this.state);
     //browserHistory.push('/lists');
     this.setState({
       text: ''
@@ -37,12 +36,25 @@ class ItemsNew extends Component {
           <label>Text: </label>
           <input type="text" onChange={(event) => this.handleOnTextChange(event)} value={this.state.text} />
           <br />
-          <input type="submit" value="Create List" />
+          <input type="submit" value="Create Item" />
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const list = state.lists.lists.find( (list) => list.id == ownProps.routeParams.list_id )
+  if (list) {
+    return {
+      list: list
+    }
+  } else {
+    return {
+      list: {}
+    };
+  }
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -50,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ItemsNew);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsNew);
