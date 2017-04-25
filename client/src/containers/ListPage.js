@@ -18,11 +18,13 @@ class ListPage extends Component {
 
     return (
       <div>
-        <h2>To do lists</h2>
-        <ul>
-          {lists}
-        </ul>
-        <Link to="/lists/new">New List</Link>
+        <div className="col-md-6">
+          <h2>To do lists</h2>
+          <ul className="lists-display">
+            {lists}
+          </ul>
+          <Link className="new-link" to="/lists/new">New List</Link>
+        </div>
         {this.props.children}
       </div>
     );
