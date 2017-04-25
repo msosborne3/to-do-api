@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleDone } from '../actions/index'
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
 class ListShow extends Component {
 
@@ -19,6 +20,7 @@ class ListShow extends Component {
           )}
         </ul>
         {this.props.children}
+        <Link to={`/lists/${list.id}/items/new`}>New Item</Link>
       </div>
     );
   }
