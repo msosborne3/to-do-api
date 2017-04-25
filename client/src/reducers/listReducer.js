@@ -31,9 +31,8 @@ export default function listReducer(state= {
           list: action.list
         })
       })
-
-
       return {lists: state.lists}
+    case 'ADD_ITEM_TO_LIST':
     default:
       return state;
   }
