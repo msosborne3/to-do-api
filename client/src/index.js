@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path='/lists' component={ListPage}>
           <Route path='/lists/new' component={ListNew} />
           <Route path='/lists/:id' component={ListShow}>
-            <Route path='/lists/:list_id/items/new' component={ItemsNew} />
+            <Route path='/lists/:id/items/new' component={ItemsNew} />
           </Route>
         </Route>
       </Route>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { addList } from '../actions';
+import { Button } from 'react-bootstrap';
 
 class ListNew extends Component {
   constructor(props) {
@@ -30,12 +31,13 @@ class ListNew extends Component {
 
   render() {
     return (
-      <div className="new-list">
+      <div className="new-list col-md-6">
         <form onSubmit={(event) => this.handleSubmit(event)}>
-          <label>List Name: </label>
-          <input type="text" onChange={(event) => this.handleOnNameChange(event)} value={this.state.name} />
-          <br />
-          <input type="submit" value="Create List" />
+          <div className="form-group">
+            <label>List Name: </label>
+            <input type="text" className="form-control" onChange={(event) => this.handleOnNameChange(event)} value={this.state.name} />
+          </div>
+          <Button type="submit">Create List</Button>
         </form>
       </div>
     );

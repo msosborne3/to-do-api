@@ -11,16 +11,16 @@ class ListShow extends Component {
     const listItems = this.props.items;
 
     return (
-      <div>
+      <div className="col-md-6">
         <h2>List: {list.name}</h2>
 
-        <ul>
+        <ul className="items-list">
           {listItems.map((item) => 
             <li key={item.id} onClick={() => {this.props.toggleDone(this.props.list, item)}}>{item.done ? <strike>{item.text}</strike> : item.text}</li>
           )}
         </ul>
+        <Link className="new-link" to={`/lists/${list.id}/items/new`}>New Item</Link>
         {this.props.children}
-        <Link to={`/lists/${list.id}/items/new`}>New Item</Link>
       </div>
     );
   }

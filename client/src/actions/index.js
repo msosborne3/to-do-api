@@ -19,10 +19,9 @@ export function addItem(list, item) {
       method: 'POST'
     })
       .then(response => response.json())
-      .then((list, item) => dispatch({
+      .then(list => dispatch({
         type: 'ADD_ITEM_TO_LIST',
-        list,
-        item
+        list
       }));
   };
 }

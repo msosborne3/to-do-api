@@ -33,6 +33,14 @@ export default function listReducer(state= {
       })
       return {lists: state.lists}
     case 'ADD_ITEM_TO_LIST':
+      const lists = state.lists.map(list => {
+        if (list.id !== action.list.id) {
+          return list
+        }
+        // if the list needed is found then change it to the new list
+        return action.list
+      })
+      return {lists: lists}
     default:
       return state;
   }
