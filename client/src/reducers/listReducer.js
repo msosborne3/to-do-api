@@ -42,7 +42,14 @@ export default function listReducer(state= {
       })
       return {lists: lists}
     case 'INCREMENT_COUNTER':
-      return {lists: action.lists}
+      state.lists.map(list => {
+        if (list.id !== action.list.id) {
+          return list
+        }
+
+        return action.list
+      })
+      return {lists: state.lists}
     default:
       return state;
   }

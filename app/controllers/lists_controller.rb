@@ -37,7 +37,7 @@ class ListsController < ApplicationController
 
   # Only allows specific params
   def list_params
-    params.permit(:name)
+    params.permit(:name, :counter)
   end
 
   # Finds the appropriate list

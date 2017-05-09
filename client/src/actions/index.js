@@ -50,11 +50,15 @@ export function fetchLists() {
   };
 }
 
-export function incrementCounter(lists) {
+
+export function incrementCounter(list) {
   return (dispatch) => {
     dispatch({
       type: 'INCREMENT_COUNTER',
-      lists
+      list
     })
-  }
+    return fetch(`/lists/${list.id}?name=${list.name}&counter=${list.counter}`, {
+      method: 'PUT'
+    })
+  };
 }

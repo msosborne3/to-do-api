@@ -21,24 +21,21 @@ class ListPage extends Component {
     this.props.fetchLists()
       .then(res => {
         this.setState({ lists: this.props.lists.lists })
-        this.state.lists.map((list) => {
-          list.counter = 0
-        })
       })
   }
 
   handleButtonClick(ev, list) {
     var copy = Object.assign({}, this.state);
-    let i = copy.lists.indexOf(list)
+    let i = copy.lists.indexOf(list);
     copy.lists[i].counter += 1;
     this.setState(copy);
-    //incrementCounter(this.state.lists)
+    this.props.incrementCounter(list);
   }
 
   render() {
     const lists = this.state.lists.map((list) => 
         <li key={list.id}>
-          <p>Upvotes: {list.counter ? list.counter : "0"}</p>
+          <p>Upvotes: {list.counter}</p>
           <Button onClick={(event) => this.handleButtonClick(event, list)}>Upvote</Button>
           <Link to={`/lists/${list.id}`}>{list.name}</Link>
         </li>
@@ -66,10 +63,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchLists: bindActionCreators(fetchLists, dispatch),
-    incrementCounter: bindActionCreators(incrementCounter, dispatch)
-  };
+  return bindActionCreators({incrementCounter, fetchLists}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
