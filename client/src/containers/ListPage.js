@@ -1,17 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { fetchLists } from '../actions/index'
+import { fetchLists, incrementCounter } from '../actions/index'
 import { Link } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 class ListPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lists: []
+    }
+    this.state.lists.map((list) => {
+      list.counter = 0
+    })
+  }
+
   componentDidMount() {
     this.props.fetchLists()
+      .then(res => {
+        this.setState({ lists: this.props.lists.lists })
+        this.state.lists.map((list) => {
+          list.counter = 0
+        })
+      })
+  }
+
+  handleButtonClick(ev, list) {
+    var copy = Object.assign({}, this.state);
+    let i = copy.lists.indexOf(list)
+    copy.lists[i].counter += 1;
+    this.setState(copy);
+    //incrementCounter(this.state.lists)
   }
 
   render() {
-    const lists = this.props.lists.lists.map((list) => 
+    const lists = this.state.lists.map((list) => 
         <li key={list.id}>
+          <p>Upvotes: {list.counter ? list.counter : "0"}</p>
+          <Button onClick={(event) => this.handleButtonClick(event, list)}>Upvote</Button>
           <Link to={`/lists/${list.id}`}>{list.name}</Link>
         </li>
       )
@@ -39,7 +67,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchLists: bindActionCreators(fetchLists, dispatch)
+    fetchLists: bindActionCreators(fetchLists, dispatch),
+    incrementCounter: bindActionCreators(incrementCounter, dispatch)
   };
 }
 

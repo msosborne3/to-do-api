@@ -41,6 +41,8 @@ export default function listReducer(state= {
         return action.list
       })
       return {lists: lists}
+    case 'INCREMENT_COUNTER':
+      return {lists: action.lists}
     default:
       return state;
   }

@@ -49,3 +49,12 @@ export function fetchLists() {
       }));
   };
 }
+
+export function incrementCounter(lists) {
+  return (dispatch) => {
+    dispatch({
+      type: 'INCREMENT_COUNTER',
+      lists
+    })
+  }
+}
